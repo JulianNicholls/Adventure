@@ -1,0 +1,6 @@
+[submodule "python"]
+	path = python
+	url = ./python
+[submodule "ruby"]
+	path = ruby
+	url = ./ruby
