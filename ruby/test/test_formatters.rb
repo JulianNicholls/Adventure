@@ -6,7 +6,7 @@ require './formatters'
 describe Formatters do
   describe '#indefinite' do
     it 'should use a (lower case) for consonantally started items' do
-      Formatters.indefinite('Blue Ball', false).must_equal 'a Blue Ball'
+      Formatters.indefinite('Blue Ball').must_equal 'a Blue Ball'
       Formatters.indefinite('Funny Face').must_equal 'a Funny Face'
       Formatters.indefinite('Mixed Grill').must_equal 'a Mixed Grill'
       Formatters.indefinite('Shiny Tuba').must_equal 'a Shiny Tuba'
@@ -14,7 +14,7 @@ describe Formatters do
     end
 
     it 'should use an (lower case) for vowelly started items' do
-      Formatters.indefinite('Articulate Aardvark', false)
+      Formatters.indefinite('Articulate Aardvark')
         .must_equal 'an Articulate Aardvark'
       Formatters.indefinite('Eggplant').must_equal 'an Eggplant'
       Formatters.indefinite('Inestimable Ibex').must_equal 'an Inestimable Ibex'
@@ -22,14 +22,14 @@ describe Formatters do
       Formatters.indefinite('Untried Usurper').must_equal 'an Untried Usurper'
     end
 
-    it 'should capitalise a or an when asked' do
-      Formatters.indefinite('Articulate Aardvark', true)
+    it 'inidefinite_capital should capitalise a or an' do
+      Formatters.indefinite_capital('Articulate Aardvark')
         .must_equal 'An Articulate Aardvark'
-      Formatters.indefinite('Funny Face', :capital).must_equal 'A Funny Face'
-      Formatters.indefinite('Inestimable Ibex', true)
+      Formatters.indefinite_capital('Funny Face').must_equal 'A Funny Face'
+      Formatters.indefinite_capital('Inestimable Ibex')
         .must_equal 'An Inestimable Ibex'
-      Formatters.indefinite('Shiny Tuba', true).must_equal 'A Shiny Tuba'
-      Formatters.indefinite('Untried Usurper', :capital)
+      Formatters.indefinite_capital('Shiny Tuba').must_equal 'A Shiny Tuba'
+      Formatters.indefinite_capital('Untried Usurper')
         .must_equal 'An Untried Usurper'
     end
 
@@ -68,9 +68,15 @@ describe Formatters do
         .must_equal 'A Green Dragon and a Blue Box'
     end
 
-    it 'should return three items correctly' do
+    it 'should return three or more items correctly' do
       Formatters.list_contents(['Green Dragon', 'Blue Box', 'Orangutan'])
         .must_equal 'A Green Dragon, a Blue Box and an Orangutan'
+
+      Formatters.list_contents(
+        ['Green Dragon', 'Blue Box', 'Orangutan', 'Elongated Armrest']
+      ).must_equal(
+        'A Green Dragon, a Blue Box, an Orangutan and an Elongated Armrest'
+      )
     end
   end
 end
