@@ -2,10 +2,12 @@
 module Formatters
   module_function
 
-  def indefinite(text, capital = false)
-    article = 'AEIOU'.include?(text[0].upcase) ? 'an' : 'a'
-    article.capitalize! if capital
-    "#{article} #{text}"
+  def indefinite(item)
+    "#{article(item)} #{item}"
+  end
+
+  def indefinite_capital(item)
+    "#{article(item).capitalize} #{item}"
   end
 
   def titlecase(text, minor_words = [])
@@ -20,16 +22,22 @@ module Formatters
     end.join ' '
   end
 
+  # :reek:TooManyStatements   I don't think it's too much
   def list_contents(list)
-    return '' if list.size == 0
-    return indefinite(list.first, :capital) if list.size == 1
+    case list.size
+    when 0  then return ''
+    when 1  then return indefinite_capital(list.first)
 
-    # Now, there's at least two items so we take off the last one and prepend
-    # 'and'
+    else # There's at least two so we take off the last one and prepend 'and'
+      last = " and #{indefinite list.pop}"
 
-    last = " and #{indefinite list.pop}"
+      (list.map.with_index do |item, idx|
+        idx == 0 ? indefinite_capital(item) : indefinite(item)
+      end.join ', ') + last
+    end
+  end
 
-    (list.map.with_index { |item, idx| indefinite(item, idx == 0) }
-    .join ', ') + last
+  def article(item)
+    'AEIOU'.include?(item[0].upcase) ? 'an' : 'a'
   end
 end
