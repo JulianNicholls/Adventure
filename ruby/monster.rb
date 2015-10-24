@@ -9,8 +9,8 @@ class Monster
   attr_reader :name, :health
 
   def self.load(str)
-    m = /(?<name>.*)\s(?<health>\d+)/.match str
-    new(m[:name], m[:health].to_i)
+    monster = /(?<name>.*)\s(?<health>\d+)/.match str
+    new(monster[:name], monster[:health].to_i)
   end
 
   def initialize(name, points)

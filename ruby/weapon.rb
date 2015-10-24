@@ -7,8 +7,8 @@ class Weapon
   attr_reader :name, :power
 
   def self.load(str)
-    m = /(?<name>.*)\s(?<power>\d+)/.match str
-    new(m[:name], m[:power].to_i)
+    weapon = /(?<name>.*)\s(?<power>\d+)/.match str
+    new(weapon[:name], weapon[:power].to_i)
   end
 
   def initialize(name, power)
