@@ -13,8 +13,11 @@ class Parser
     nil
   end
 
+  # :reek:ControlParameter   expected is really the point
+  # Obviously, it could be split out to match_verb, match_noun etc, but that
+  # makes no sense to me.
   def match(expected)
-    word = @words.shift
+    word = first_word
 
     word.token == expected ? word : nil
   rescue
@@ -57,12 +60,20 @@ class Parser
 
     case start
     when :noun  then  return parse_subject(match(:noun)) # Complete NVO phrase
-    when :verb  then  return parse_subject(Lexicon.player) # player phrase
+    when :verb  then  return parse_subject(player)       # player phrase
 
     when :direction # Movement, just 'north' or 'up'
-      return Sentence.new(Lexicon.player, Lexicon.go, match(:direction))
+      return Sentence.new(player, Lexicon.go, match(:direction))
     end
+  end
 
-    fail "Must start with subject, object, or verb not: #{start}"
+  private
+
+  def first_word
+    @words.shift
+  end
+
+  def player
+    @player ||= Lexicon.player
   end
 end
