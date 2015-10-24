@@ -4,17 +4,17 @@ require './formatters'
 class Monster
   include Formatters
 
-  INJURED = %w{staggering reeling injured}
+  INJURED = %w(staggering reeling injured)
 
   attr_reader :name, :health
 
-  def self.load( str )
+  def self.load(str)
     m = /(?<name>.*)\s(?<health>\d+)/.match str
-    new( m[:name], m[:health].to_i )
+    new(m[:name], m[:health].to_i)
   end
 
-  def initialize( name, points )
-    @name   = titlecase( name )
+  def initialize(name, points)
+    @name = titlecase(name)
     @full_health = @health = points
   end
 
@@ -22,7 +22,7 @@ class Monster
     indefinite name
   end
 
-  def hit( amount )
+  def hit(amount)
     amount  = amount.power if amount.respond_to? :power
     @health = [0, health - amount].max
   end

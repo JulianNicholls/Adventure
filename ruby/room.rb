@@ -5,16 +5,16 @@ require './inventory'
 class Room
   include Formatters
 
-  def initialize( desc, monster = nil, *items )
+  def initialize(desc, monster = nil, *items)
     @description = desc
     @monster     = monster
-    @items       = Inventory.new( *items )
+    @items       = Inventory.new(*items)
   end
 
-  # Drop, in this case, adds to the room, i.e. drop the sword you were carrying on
-  # the floor.
-  def drop( *items )
-    @items.add( *items )
+  # Drop, in this case, adds to the room, i.e. drop the sword you were
+  # carrying on the floor.
+  def drop(*items)
+    @items.add(*items)
   end
 
   def description

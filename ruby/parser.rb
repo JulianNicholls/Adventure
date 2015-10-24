@@ -3,7 +3,7 @@ require './sentence'
 
 # Sentence Parser
 class Parser
-  def initialize( word_list )
+  def initialize(word_list)
     @words = word_list
   end
 
@@ -13,7 +13,7 @@ class Parser
     nil
   end
 
-  def match( expected )
+  def match(expected)
     word = @words.shift
 
     word.token == expected ? word : nil
@@ -21,48 +21,46 @@ class Parser
     nil
   end
 
-  def skip( token )
-    match( token ) while peek == token
+  def skip(token)
+    match(token) while peek == token
   end
 
   def parse_verb
-    skip( :stop )
+    skip(:stop)
 
-    return match( :verb ) if peek == :verb
+    return match(:verb) if peek == :verb
 
     fail 'Expected a Verb.'
   end
 
   def parse_object
-    skip( :stop )
+    skip(:stop)
     next_word = peek
 
-    return match( :noun )      if next_word == :noun
-    return match( :direction ) if next_word == :direction
+    return match(:noun)      if next_word == :noun
+    return match(:direction) if next_word == :direction
 
     fail 'Expected a Noun or Direction.'
   end
 
-  def parse_subject( subj )
+  def parse_subject(subj)
     verb = parse_verb
     obj  = parse_object
 
-    Sentence.new( subj, verb, obj )
+    Sentence.new(subj, verb, obj)
   end
 
   def parse_sentence
-    skip( :stop )
+    skip(:stop)
 
-    start   = peek
-    player  = Lexicon::Pair.new( :noun, 'player' )
+    start = peek
 
     case start
-    when :noun  then  return parse_subject( match( :noun ) ) # Complete NVO phrase
-    when :verb  then  return parse_subject( player )         # player-centric phrase
+    when :noun  then  return parse_subject(match(:noun)) # Complete NVO phrase
+    when :verb  then  return parse_subject(Lexicon.player) # player phrase
 
-    when :direction       # Movement, just 'north' or 'up'
-      return Sentence.new( player, Lexicon::Pair.new( :verb, 'go' ),
-                           match( :direction ) )
+    when :direction # Movement, just 'north' or 'up'
+      return Sentence.new(Lexicon.player, Lexicon.go, match(:direction))
     end
 
     fail "Must start with subject, object, or verb not: #{start}"

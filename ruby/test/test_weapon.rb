@@ -4,8 +4,8 @@ require 'minitest/pride'
 require './weapon'
 
 describe Weapon do
-  let( :sword )       { Weapon.new( 'sword', 2 ) }
-  let( :magic_sword ) { Weapon.new( 'magic sword', 3 ) }
+  let(:sword)       { Weapon.new('sword', 2) }
+  let(:magic_sword) { Weapon.new('magic sword', 3) }
 
   describe '#name' do
     it 'should return its name Capitalised' do
@@ -31,13 +31,13 @@ describe Weapon do
     end
 
     it "should return 'an Iceaxe' for an iceaxe" do
-      Weapon.new( 'iceaxe', 2 ).indefinite_name.must_equal 'an Iceaxe'
+      Weapon.new('iceaxe', 2).indefinite_name.must_equal 'an Iceaxe'
     end
   end
 
   describe '#load' do
-    let( :wea2 ) { Weapon.load( 'sharpened banana 3' ) }
-    let( :wea3 ) { Weapon.load( 'stolen bicorn horn 17' ) }
+    let(:wea2) { Weapon.load('sharpened banana 3') }
+    let(:wea3) { Weapon.load('stolen bicorn horn 17') }
 
     it 'should be named correctly' do
       wea2.name.must_equal 'Sharpened Banana'

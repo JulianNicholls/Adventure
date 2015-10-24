@@ -6,13 +6,13 @@ class Weapon
 
   attr_reader :name, :power
 
-  def self.load( str )
+  def self.load(str)
     m = /(?<name>.*)\s(?<power>\d+)/.match str
-    new( m[:name], m[:power].to_i )
+    new(m[:name], m[:power].to_i)
   end
 
-  def initialize( name, power )
-    @name   = titlecase( name )
+  def initialize(name, power)
+    @name   = titlecase(name)
     @power  = power
   end
 

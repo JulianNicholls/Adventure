@@ -5,17 +5,17 @@ require './formatters'
 class Inventory
   include Formatters
 
-  def initialize( *items )
+  def initialize(*items)
     @items = []
-    add( *items ) if items
+    add(*items) if items
   end
 
-  def add( *items )
-    items.each { |item| @items << storable( item ) }
+  def add(*items)
+    items.each { |item| @items << storable(item) }
   end
 
   def contents
-    list_contents @items.map( &:to_s )
+    list_contents @items.map(&:to_s)
   end
 
   def size
@@ -24,12 +24,12 @@ class Inventory
 
   # Drop means remove from the inventory, and it may also be added to a room,
   # hence why the dropped item is returned here
-  def drop( thing )
+  def drop(thing)
     return nil unless got_a? thing
 
     thing.downcase!
-    idx = @items.find_index { |item| item.downcase.index( thing ) }
-    @items.delete_at( idx )
+    idx = @items.find_index { |item| item.downcase.index(thing) }
+    @items.delete_at(idx)
   end
 
   def got_a_sword?
@@ -40,18 +40,18 @@ class Inventory
     got_a? 'key'
   end
 
-  def got_a?( thing )
+  def got_a?(thing)
     thing.downcase!
-    @items.any? { |item| item.downcase.index( thing ) }
+    @items.any? { |item| item.downcase.index(thing) }
   end
 
   private
 
   # If it's an item, it can just be stored
   # A bare string item name is titlecased before storage
-  def storable( item )
-    return item if item.respond_to?( :name )
+  def storable(item)
+    return item if item.respond_to?(:name)
 
-    titlecase( item )
+    titlecase(item)
   end
 end
