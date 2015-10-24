@@ -1,5 +1,6 @@
 # Parser for user input
 class Lexicon
+  # Token structure: token type, and value / text
   Pair        = Struct.new(:token, :word)
 
   VERBS       = %w(go dig kill eat take drop stop open hit attack)
@@ -15,14 +16,11 @@ class Lexicon
   }
 
   def self.scan(text)
-    pairs = []
-    text.split.map(&:downcase).each do |word|
+    text.split.map(&:downcase).reduce([]) do |pairs, word|
       tok  = token_type(word)
       word = word.to_i if tok == :number
       pairs << Pair.new(tok, word)
     end
-
-    pairs
   end
 
   def self.token_type(word)
