@@ -22,7 +22,17 @@ describe Formatters do
       Formatters.indefinite('Untried Usurper').must_equal 'an Untried Usurper'
     end
 
-    it 'inidefinite_capital should capitalise a or an' do
+    it 'should not care about the case of the first character of the noun' do
+      Formatters.indefinite('shoe').must_equal 'a shoe'
+      Formatters.indefinite('arm').must_equal 'an arm'
+
+      Formatters.indefinite('Shoe').must_equal 'a Shoe'
+      Formatters.indefinite('Arm').must_equal 'an Arm'
+    end
+  end
+
+  describe '#indefinite_capital' do
+    it 'should capitalise a or an' do
       Formatters.indefinite_capital('Articulate Aardvark')
         .must_equal 'An Articulate Aardvark'
       Formatters.indefinite_capital('Funny Face').must_equal 'A Funny Face'
@@ -31,11 +41,6 @@ describe Formatters do
       Formatters.indefinite_capital('Shiny Tuba').must_equal 'A Shiny Tuba'
       Formatters.indefinite_capital('Untried Usurper')
         .must_equal 'An Untried Usurper'
-    end
-
-    it 'should not care about the case of the first character of the noun' do
-      Formatters.indefinite('shoe').must_equal 'a shoe'
-      Formatters.indefinite('arm').must_equal 'an arm'
     end
   end
 
@@ -49,6 +54,9 @@ describe Formatters do
     it 'should be able to ignore words' do
       Formatters.titlecase('the cat in the hat').must_equal 'The Cat In The Hat'
       Formatters.titlecase('THE CAT IN THE HAT', %w(the in))
+        .must_equal 'The Cat in the Hat'
+
+      Formatters.titlecase('THE CAT IN THE HAT', %w(The IN))
         .must_equal 'The Cat in the Hat'
     end
   end

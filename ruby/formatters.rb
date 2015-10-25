@@ -11,7 +11,7 @@ module Formatters
   end
 
   def titlecase(text, minor_words = [])
-    minor_words.map(&:downcase)
+    minor_words.map!(&:downcase)
 
     text.split.map.with_index do |word, idx|
       word.downcase!

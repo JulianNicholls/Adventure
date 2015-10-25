@@ -3,10 +3,10 @@ class Lexicon
   # Token structure: token type, and value / text
   Pair        = Struct.new(:token, :word)
 
-  VERBS       = %w(go dig kill eat take drop stop open hit attack)
+  VERBS       = %w(go dig eat take drop stop open close unlock kill hit attack)
   DIRECTIONS  = %w(up down left right north south east west back)
-  STOPS       = %w(in of and the from at it to)
-  NOUNS       = %w(bear princess tower door cabinet)
+  STOPS       = %w(in of and the from at it to on)
+  NOUNS       = %w(bear princess tower door cabinet castle)
 
   WORD_MAP    = {
     verb:       VERBS,
