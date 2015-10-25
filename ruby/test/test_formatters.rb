@@ -51,7 +51,7 @@ describe Formatters do
       Formatters.titlecase('ReD PoStBoX').must_equal 'Red Postbox'
     end
 
-    it 'should be able to ignore words' do
+    it 'should be able to ignore words, case-insensitively' do
       Formatters.titlecase('the cat in the hat').must_equal 'The Cat In The Hat'
       Formatters.titlecase('THE CAT IN THE HAT', %w(the in))
         .must_equal 'The Cat in the Hat'

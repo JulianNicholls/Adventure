@@ -16,6 +16,7 @@ describe Lexicon do
       Lexicon.scan('down').must_equal [Pair.new(:direction, 'down')]
       Lexicon.scan('left').must_equal [Pair.new(:direction, 'left')]
       Lexicon.scan('right').must_equal [Pair.new(:direction, 'right')]
+      Lexicon.scan('back').must_equal [Pair.new(:direction, 'right')]
     end
 
     # This is sufficient for testing that mixed case is handled, it's not
