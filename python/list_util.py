@@ -21,16 +21,16 @@ def comma_and(str_list):
 
 
 if __name__ == '__main__':
-    print "test: []\t\t", comma_and([])
-    print "test: a:\t\t", comma_and(['alpha'])
-    print "test: a, b:\t\t", comma_and(['alpha', 'bravo'])
-    print "test: a, b, c:\t\t", comma_and(['alpha', 'bravo', 'charlie'])
-    print "test: a, b, c, d:\t", comma_and(['alpha', 'bravo', 'charlie', 'delta'])
+    print("test: []\t\t", comma_and([]))
+    print("test: a:\t\t", comma_and(['alpha']))
+    print("test: a, b:\t\t", comma_and(['alpha', 'bravo']))
+    print("test: a, b, c:\t\t", comma_and(['alpha', 'bravo', 'charlie']))
+    print("test: a, b, c, d:\t", comma_and(['alpha', 'bravo', 'charlie', 'delta']))
 
     tuple = ('can', 'not', 'change', 'me')
-    print "\ntest: 4 element tuple:\t", comma_and(tuple)
-    print "test: tuple after:\t", tuple
+    print("\ntest: 4 element tuple:\t", comma_and(tuple))
+    print("test: tuple after:\t", tuple)
 
     list1 = ['must', 'not', 'change', 'me']
-    print "\ntest: 4 element list:\t", comma_and(list1)
-    print "test: list after:\t", list1
+    print("\ntest: 4 element list:\t", comma_and(list1))
+    print("test: list after:\t", list1)
